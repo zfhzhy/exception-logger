@@ -9,12 +9,14 @@ namespace Idmediaworks.ExceptionLogger
 	{
 		public static void Log(ExceptionDetails details)
 		{
+			var config = Configuration.GetConfig();
+
 			using (var message = new MailMessage())
 			{
 				var subject = details.Message.Replace(Environment.NewLine, " ");
 
-				message.From = new MailAddress(string.Format("{0}@{1}", details.MachineName, details.Hostname));
-				message.To.Add(Configuration.GetConfig().MailTo);
+				message.From = new MailAddress(string.Format("{0}@{1}", details.MachineName, details.Hostname).ToLower());
+				message.To.Add(config.MailTo);
 				message.Subject = subject;
 				message.Body = formatBody(details);
 				message.IsBodyHtml = true;

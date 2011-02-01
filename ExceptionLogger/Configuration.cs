@@ -26,7 +26,7 @@ namespace Idmediaworks.ExceptionLogger
 			var mailNode = node.SelectSingleNode("mail");
 
 			// Set properties
-			MailTo = mailNode.Attributes["to"].Value;
+			MailTo = mailNode.Attributes["to"].Value.ToLower();
 		}
 
 		/// <summary>
